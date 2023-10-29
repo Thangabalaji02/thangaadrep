@@ -1,0 +1,9 @@
+{
+	"name": "thangadatafact",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c2d6ffe3-9749-4152-8359-b8ebae18b297",
+		"tenantId": "e0e8aedb-eb99-453e-a119-798e1c9de99a"
+	}
+}
