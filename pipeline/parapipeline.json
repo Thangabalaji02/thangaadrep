@@ -201,7 +201,36 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableLogging": true
+					"dataset": {
+						"referenceName": "paradataset",
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_fileystem": {
+								"value": "@pipeline().parameters.PP_file_system",
+								"type": "Expression"
+							},
+							"ds_directory": {
+								"value": "@pipeline().parameters.PP_directory_out",
+								"type": "Expression"
+							},
+							"ds_filename": {
+								"value": "@pipeline().parameters.PP_file_name",
+								"type": "Expression"
+							}
+						}
+					},
+					"logStorageSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureDataLakeStorage1",
+							"type": "LinkedServiceReference"
+						}
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
 				}
 			}
 		],
