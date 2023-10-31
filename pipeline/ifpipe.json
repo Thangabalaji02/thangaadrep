@@ -20,7 +20,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"ds_fileystem": {
-								"value": "@pipeline().parameters.PP_Filename",
+								"value": "@pipeline().parameters.PP_Filesystem",
 								"type": "Expression"
 							},
 							"ds_directory": {
@@ -46,6 +46,215 @@
 						"type": "DelimitedTextReadSettings"
 					}
 				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get Metadata1').output.childItems",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@endswith(item().name,'csv')",
+									"type": "Expression"
+								},
+								"ifFalseActivities": [
+									{
+										"name": "Copy data2",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "DelimitedTextSource",
+												"storeSettings": {
+													"type": "AzureBlobFSReadSettings",
+													"recursive": true,
+													"enablePartitionDiscovery": false
+												},
+												"formatSettings": {
+													"type": "DelimitedTextReadSettings"
+												}
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobFSWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "paradataset",
+												"type": "DatasetReference",
+												"parameters": {
+													"ds_fileystem": {
+														"value": "@pipeline().parameters.PP_Filesystem",
+														"type": "Expression"
+													},
+													"ds_directory": {
+														"value": "@pipeline().parameters.PP_Directory_in",
+														"type": "Expression"
+													},
+													"ds_filename": {
+														"value": "@activity('Get Metadata1').output.childItems",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "paradataset",
+												"type": "DatasetReference",
+												"parameters": {
+													"ds_fileystem": {
+														"value": "@pipeline().parameters.PP_Filesystem",
+														"type": "Expression"
+													},
+													"ds_directory": {
+														"value": "@pipeline().parameters.PP_direct_out_txt",
+														"type": "Expression"
+													},
+													"ds_filename": {
+														"value": "@activity('Get Metadata1').output.childItems",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "Copy data1",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "DelimitedTextSource",
+												"storeSettings": {
+													"type": "AzureBlobFSReadSettings",
+													"recursive": true,
+													"enablePartitionDiscovery": false
+												},
+												"formatSettings": {
+													"type": "DelimitedTextReadSettings"
+												}
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobFSWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "paradataset",
+												"type": "DatasetReference",
+												"parameters": {
+													"ds_fileystem": {
+														"value": "@pipeline().parameters.PP_Filesystem",
+														"type": "Expression"
+													},
+													"ds_directory": {
+														"value": "@pipeline().parameters.PP_Directory_in",
+														"type": "Expression"
+													},
+													"ds_filename": {
+														"value": "@activity('Get Metadata1').output.childItems",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "paradataset",
+												"type": "DatasetReference",
+												"parameters": {
+													"ds_fileystem": {
+														"value": "@pipeline().parameters.PP_Filesystem",
+														"type": "Expression"
+													},
+													"ds_directory": {
+														"value": "@pipeline().parameters.PP_Directory_out",
+														"type": "Expression"
+													},
+													"ds_filename": {
+														"value": "@activity('Get Metadata1').output.childItems",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									}
+								]
+							}
+						}
+					]
+				}
 			}
 		],
 		"parameters": {
@@ -59,6 +268,9 @@
 				"type": "string"
 			},
 			"PP_Directory_out": {
+				"type": "string"
+			},
+			"PP_direct_out_txt": {
 				"type": "string"
 			}
 		},
