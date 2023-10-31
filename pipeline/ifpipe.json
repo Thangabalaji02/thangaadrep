@@ -1,0 +1,67 @@
+{
+	"name": "ifpipe",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "paradataset",
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_fileystem": {
+								"value": "@pipeline().parameters.PP_Filename",
+								"type": "Expression"
+							},
+							"ds_directory": {
+								"value": "@pipeline().parameters.PP_Directory_in",
+								"type": "Expression"
+							},
+							"ds_filename": {
+								"value": "@pipeline().parameters.PP_Filename",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"childItems",
+						"itemName",
+						"itemType"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"PP_Filesystem": {
+				"type": "string"
+			},
+			"PP_Directory_in": {
+				"type": "string"
+			},
+			"PP_Filename": {
+				"type": "string"
+			},
+			"PP_Directory_out": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
