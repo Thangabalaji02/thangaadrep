@@ -134,10 +134,7 @@
 														"value": "@pipeline().parameters.PP_Directory_in",
 														"type": "Expression"
 													},
-													"ds_filename": {
-														"value": "@activity('Get Metadata1').output.childItems",
-														"type": "Expression"
-													}
+													"ds_filename": "@item().name"
 												}
 											}
 										],
@@ -154,10 +151,7 @@
 														"value": "@pipeline().parameters.PP_direct_out_txt",
 														"type": "Expression"
 													},
-													"ds_filename": {
-														"value": "@activity('Get Metadata1').output.childItems",
-														"type": "Expression"
-													}
+													"ds_filename": "@item().name"
 												}
 											}
 										]
@@ -222,10 +216,7 @@
 														"value": "@pipeline().parameters.PP_Directory_in",
 														"type": "Expression"
 													},
-													"ds_filename": {
-														"value": "@activity('Get Metadata1').output.childItems",
-														"type": "Expression"
-													}
+													"ds_filename": "@item().name"
 												}
 											}
 										],
@@ -242,10 +233,7 @@
 														"value": "@pipeline().parameters.PP_Directory_out",
 														"type": "Expression"
 													},
-													"ds_filename": {
-														"value": "@activity('Get Metadata1').output.childItems",
-														"type": "Expression"
-													}
+													"ds_filename": "@item().name"
 												}
 											}
 										]
