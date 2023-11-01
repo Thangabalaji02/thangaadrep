@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "SalesLT",
-			"table": "NEWTAB2"
+			"table": "NEWTAB1"
 		}
 	}
 }
