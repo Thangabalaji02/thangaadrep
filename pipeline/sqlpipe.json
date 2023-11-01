@@ -17,6 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT ProductID, Name, Color, Weight FROM [SalesLT].[Product] where (Color='Black' or Color='Red')",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -60,7 +61,7 @@
 								"value": "@pipeline().parameters.PP_Directory",
 								"type": "Expression"
 							},
-							"ds_filename": "newfile.csv"
+							"ds_filename": "newfile1.csv"
 						}
 					}
 				]
