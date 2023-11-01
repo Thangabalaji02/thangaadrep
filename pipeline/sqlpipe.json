@@ -59,7 +59,8 @@
 							"ds_directory": {
 								"value": "@pipeline().parameters.PP_Directory",
 								"type": "Expression"
-							}
+							},
+							"ds_filename": "newfile.csv"
 						}
 					}
 				]
