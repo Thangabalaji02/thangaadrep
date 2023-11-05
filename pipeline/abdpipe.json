@@ -17,11 +17,11 @@
 				"typeProperties": {
 					"notebookPath": "/Users/thangabalaji20@outlook.com/firstNotebook1",
 					"baseParameters": {
-						"pp_file": {
+						"filepath": {
 							"value": "@pipeline().parameters.pp_file",
 							"type": "Expression"
 						},
-						"pp_count": {
+						"count": {
 							"value": "@pipeline().parameters.pp_count",
 							"type": "Expression"
 						}
