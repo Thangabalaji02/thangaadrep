@@ -15,7 +15,17 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/thangabalaji20@outlook.com/firstNotebook1"
+					"notebookPath": "/Users/thangabalaji20@outlook.com/firstNotebook1",
+					"baseParameters": {
+						"pp_file": {
+							"value": "@pipeline().parameters.pp_file",
+							"type": "Expression"
+						},
+						"pp_count": {
+							"value": "@pipeline().parameters.pp_count",
+							"type": "Expression"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricks1",
@@ -23,6 +33,16 @@
 				}
 			}
 		],
+		"parameters": {
+			"pp_file": {
+				"type": "string",
+				"defaultValue": "user/ijsgh"
+			},
+			"pp_count": {
+				"type": "string",
+				"defaultValue": "5"
+			}
+		},
 		"annotations": []
 	}
 }
